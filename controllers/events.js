@@ -75,6 +75,7 @@ function saveEvent(request, response){
   if (validator.isLength(request.body.title, 5, 50) === false) {
     contextData.errors.push('Your title should be between 5 and 100 letters.');
   }
+
   
   var year = checkIntRange(request, 'year', 2015, 2016, contextData);
   var month = checkIntRange(request, 'month', 0, 11, contextData);
@@ -124,9 +125,18 @@ function rsvp (request, response){
 
 function api(request, response){
   var output = {events: []};
-  for(var i = 0; i < events.all.length; i++){
-    output.events.push('foo');
+  var search = request.query.search;
+ 
+  if(search){
+    for(var i = 0; i < events.all.length; i++){
+      if(events.all[i].title.indexOf(search) !== -1){
+         output.events.push(events.all[i]);
+      }
+    }
+  }else{
+    output.events = events.all;
   }
+  
   response.json(output);
 }
 
