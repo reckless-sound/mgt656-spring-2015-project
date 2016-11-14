@@ -124,10 +124,16 @@ function rsvp (request, response){
 
 function api(request, response){
   var output = {events: []};
-  for(var i = 0; i < events.all.length; i++){
-    output.events.push('foo');
+  var search = request.query.search;
+  
+  if(search){
+    for (var i = 0; i < events.all.length[i]; i++){
+    output.events.push(events.all[i]);
+    }
+  }else{
+    output.events = events.all;
   }
-  response.json(output);
+   response.json(output);
 }
 
 /**
@@ -139,5 +145,9 @@ module.exports = {
   'eventDetail': eventDetail,
   'newEvent': newEvent,
   'saveEvent': saveEvent,
-  'rsvp': rsvp
+  'rsvp': rsvp,
+  'api': api
 };
+
+
+
