@@ -70,10 +70,31 @@ function checkIntRange(request, fieldName, minVal, maxVal, contextData){
  * our global list of events.
  */
 function saveEvent(request, response){
+ 
   var contextData = {errors: []};
+  
+  var isURL = request.body.image.startsWith('http://');
+  var isWWW = request.body.image.startsWith('www.')
+  var isPNG = request.body.image.endsWith('.png');
+  var isGIF = request.body.image.endsWith('.gif');
+  
 
   if (validator.isLength(request.body.title, 5, 50) === false) {
     contextData.errors.push('Your title should be between 5 and 100 letters.');
+    }
+    
+     if (validator.isLength(request.body.location, 5, 50) === false) {
+    contextData.errors.push('Your location should be between 5 and 100 letters.');
+    }
+    
+      if(isPNG === false) {
+        if(isGIF === false )
+        contextData.errors.push('Your image should be .gif or .png');
+  }
+  
+        if(isURL === false) {
+          if(isWWW === false)
+           contextData.errors.push('Your image should be a URL');
   }
   
   var year = checkIntRange(request, 'year', 2015, 2016, contextData);
@@ -81,8 +102,9 @@ function saveEvent(request, response){
   var day = checkIntRange(request, 'day', 1, 31, contextData);
   var hour = checkIntRange(request, 'hour', 0, 23, contextData);
   
-    
-      if (contextData.errors.length === 0) {
+  
+  if (contextData.errors.length === 0) {
+
     var newEvent = {
       title: request.body.title,
       location: request.body.location,
@@ -91,7 +113,7 @@ function saveEvent(request, response){
       attending: []
     };
     events.all.push(newEvent);
-    response.redirect('/events');
+    response.redirect('/events/');
   }else{
     response.render('create-event.html', contextData);
   }

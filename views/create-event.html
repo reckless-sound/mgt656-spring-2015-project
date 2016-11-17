@@ -1,28 +1,33 @@
+{% extends "layout.html" %}
 
-
-
+     
+     
 {% block mainContent %}
 
-  //{% if errors %}
-    //{% include "fragments/errors.html" %}
- //{% endif %}
+ <h1>Create New Event Here</h1></br>
+ 
+ 
+  {% if errors %}
+    {% include "fragments/errors.html" %}
+ {% endif %}
 
 	<form id="create-event" method="POST">
 	  
-	    <label for="title">Event title:</label>
-    <input type="text" name="title">
+	   <label for="title">Event title:</label>
+    <input type="text" name="title"></br>
+    
     
     <label for="location">Event location:</label>
-    <input type="text" name="location">
+    <input type="text" name="location"></br>
     
     <label for="image">Event image:</label>
-    <input type="text" name="image">
+    <input type="text" name="image"></br>
     
     <label for="year">Event year:</label>
     <select name="year">
       <option value="2015">2015</option>
       <option value="2016">2016</option>
-    </select>
+    </select></br>
 
    <label for="month">Event month:</label>
     <select name="month">
@@ -38,7 +43,7 @@
       <option value="9">October</option>
       <option value="10">November</option>
       <option value="11">December</option>
-    </select>
+    </select></br>
     
     <label for="day">Event day:</label>
    <label for="day">Event month:</label>
@@ -73,7 +78,7 @@
       <option value="29">29</option>
       <option value="30">30</option>
       <option value="31">31</option>
-    </select>
+    </select></br>
     
     <label for="hour">Event hour:</label>
     <select name="hour">
@@ -101,16 +106,16 @@
       <option value="21">21</option>
       <option value="22">22</option>
       <option value="23">23</option>
-    </select>
+    </select></br>
       
     <label for="minute">Event minute:</label>
     <select name="minute">
       <option value="0">0</option>
       <option value="30">30</option>
-    </select>
+    </select></br></br>
     
   <input type="submit">
-  </form>
+  </form></br></br>
 {% endblock %}
-
+</br></br>
 
